@@ -1,0 +1,161 @@
+= Linux basic commands
+
+== List dir content as tree
+*Available from start on all Linux OS :* +
+find . | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
+
+== User & Group
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*adduser [username]*
+|Create the specified user
+
+|*useradd [username]*
+|Create the specified user. OpenSuse
+
+|*groupadd [group name] [-r]*
+|Create the specified group. Use -r to create a system group
+
+|*adduser [username] [group name]*
+|Add the specified user to the group. Ubuntu & CentOS
+
+|*usermod -aG [group name] [username]*
+|Add the specified user to the group. OpenSuse & Debian
+
+|*sudo su [username]*
+|Change active session to the specified user
+
+|*sudo passwd [username]*
+|Change specified user password
+|===
+
+== DEBUG
+Journalctl -xe | grep service_name +
+sed -n "5p" log_file_name +
+Sed -n "1p;5p;10;" log_file_name
+
+== Partition
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*sudo lsblk*
+|Display all available partition / devices (USB)
+
+|*sudo mount /dev/sda1[partition/disk/device] /media/[dir_name]*
+|Mount partition/disk/device to the specified path
+
+|*sudo fdisk /dev/sda*
+|Start disk formating for the specified partition/disk/device.
+N to create a new partition.
+  P to choose a primary partition.
+    [Enter] x3.
+      W to write the partition table to disk and exit.
+
+|*sudo mkfs.ext4 /dev/sda1*
+|Create ext4 file system on the newly partition create on /dev/sda
+
+|*sudo blkid /dev/sda*
+|Obtain partition ID
+
+|*sudo nano /etc/fstab*
+|Add newly partition to the fstab file to make it mount permanently on boot.
+Example for iSCSI :
+  UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx /mnt/iSCSI1 ext4 _netdev 0 0
+
+|*sudo blkid /dev/sda1 [+ pipe] cut -d'"' -f2*
+|Extract the UUID part only
+|===
+=== NTFS issue on CentOS
+.You need to install this 2 packages :
+* sudo dnf install epel-release.
+* sudo dnf install ntfs-3g.
+* THEN reboot or restart service
+
+== ARP
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*sudo apt install net-tools*
+|Install on ubuntu a sys-admin utils tools package
+
+|*sudo arp -a*
+|Display all host with the BSD style
+
+|*sudo arp -n*
+|No DNS resolution
+|===
+
+== CHMOD
+[cols=3, options="header"]
+|===
+|Number
+|Permission
+|Totals
+
+|0
+|---
+|0+0+0
+
+|1
+|--x
+|0+0+1
+
+|2
+|-w-
+|0+2+0
+
+|3
+|-wx
+|0+2+1
+
+|4
+|r--
+|4+0+0
+
+|5
+|r-x
+|4+0+1
+
+|6
+|rw-
+|4+2+0
+
+|7
+|rwx
+|4+2+1
+|===
+
+== File transfer
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*sudo scp [source_file_path] username@ip_address:/home/username*
+|SSH - Transfer a FILE to a remote host
+
+|*sudo scp -r [source_dir_path] username@ip_address:/home/username*
+|SSH - Transfer a DIR to a remote host
+
+|*wget -r -np http://example.com/configs/.vim/*
+|HTTP - Transfer a DIR to a remote host
+|===
+
+== Customize Shell and alias
+add to the .bashrc file or .zshrc file +
+
+*With color :* +
+PS1='\n\[\e[37m\]\t - \[\e[90m\][\[\e[37;3m\]\h\[\e[0;90m\]-\[\e[94m\]\u\[\e[37m\]:\[\e[38;5;220;1m\]\w\[\e[0;90m\]]\n\[\e[37m\]->\[\e[0m\]' +
+
+*Normal (Without color) :* +
+PS1='\t - [\[\e[3m\]\h\[\e[0m\]-\u:\[\e[1m\]\w\[\e[0m\]]\n->' +
+
+Alias ll='ls -la'
+
