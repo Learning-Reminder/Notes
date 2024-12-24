@@ -46,6 +46,9 @@ Sed -n "1p;5p;10;" log_file_name
 |*sudo lsblk*
 |Display all available partition / devices (USB)
 
+|*sudo fsdisk -l*
+|Display all available partition / devices (USB)
+
 |*sudo mount /dev/sda1[partition/disk/device] /media/[dir_name]*
 |Mount partition/disk/device to the specified path
 
@@ -69,6 +72,49 @@ Example for iSCSI :
 
 |*sudo blkid /dev/sda1 [+ pipe] cut -d'"' -f2*
 |Extract the UUID part only
+|===
+
+== PV / VG / LV
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*sudo pvdisplay -v*
+|List physical volumes
+
+|*sudo vgdisplay -v*
+|List volume groups
+
+|*sudo lvdisplay -v*
+|List logival volumes
+|===
+
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*sudo pvcreate [disk_path] Ex. /dev/sdb*
+|Create new physical volume using disk/device
+
+|*sudo vgcreate [volume_group_name] [disk_path]*
+|Create new volume group on the newly created physical volume
+
+|*sudo vgextend [volume_group_name] [disk_path]*
+|Exentend the specified volume group with the newly created physical volume
+
+|*sudo lvcreate -L size(10G) -n [logival_volume_name] [volume_group_name]*
+|Create new logical volume on the newly created volume group
+
+|*sudo lvm lvextend -l +100%FREE /dev/[volume_group_name]/[logival_volume_name]*
+|Extend the specified logival volume with all available space on the specified volume group
+
+|*sudo mke2fs -j /dev/[volume_group_name]/[logival_volume_name]*
+|Create ext4 partition on the specified logical volume
+
+|*sudo resize2fs /dev/[volume_group_name]/[logival_volume_name]*
+|Resize/extend an existing ext4 partition on the specified logical volume
 |===
 === NTFS issue on CentOS
 .You need to install this 2 packages :
