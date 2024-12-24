@@ -1,0 +1,18 @@
+== Interface
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*sudo ip link set up [interface_name]*
+|Activate/Bring the specified interface up
+
+|*sudo ip link set down [interface_name]*
+|Desactivate/Bring the specified interface down
+
+|*sudo ip link show [interface_name]*
+|Show status of the specified interface
+
+|*sudo dhclient -v [interface_name]*
+|Renew DHCP lease on the specified interface
+|===
