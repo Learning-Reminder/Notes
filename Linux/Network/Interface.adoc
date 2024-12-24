@@ -1,4 +1,4 @@
-= Interface
+== Interface
 [cols=2, options="header"]
 |===
 |Command
