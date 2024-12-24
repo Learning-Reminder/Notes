@@ -1,0 +1,15 @@
+= Using Linux server as Router
+
+== DHCP
+On ubuntu install *isc-dhcp-relay* package
+
+== Forwarding packets between interfaces
+=== Ubuntu
+*/proc/sys/net/ipv4/ip_forward*
+
+* sudo vim /etc/sysctl.conf +
+* Uncomment line net.ipv4.ip_forward=1 +
+* sudo systemctl restart systemd-sysctl +
+
+=== CentOS 7
+echo "net.ipv4.ip_forward = "1" > /etc/sysctl.d/router.conf
