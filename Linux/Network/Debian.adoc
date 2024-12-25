@@ -1,0 +1,9 @@
+= Debian network configuration
+
+== Static ip configuration
+
+Configuration file can be found at /etc/network/interfaces +
+DNS : */etc/resolv_conf* IS NOT A LINK FILE. Modify directly
+
+image::../Images/Network/debian.png[]
+image::../Images/Network/debian_route.png[]
