@@ -1,5 +1,7 @@
 = Ubuntu - Apache configuration
 
+WEB file root : */var/www/html/*
+
 == Installation
 
 sudo apt install apache2 +
