@@ -1,0 +1,12 @@
+= Ubuntu - TFTP configuration
+Root dir : */srv/tftp* +
+sudo systemctl status tftpd-hpa
+
+== Installation
+sudo apt install tftpd-hpa +
+sudo chown tftp:tftp */srv/tftp* +
+
+== Allow file upload(creation)
+sudo nano /etc/default/tfpd-hpa +
+Add --create to TFTP_OPTIONS +
+TFTP_OPTIONS ="--secure --create"
