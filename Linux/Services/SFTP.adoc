@@ -1,0 +1,4 @@
+= SFTP configuration
+
+== Create sftp group
+sudo addgroup sftp
