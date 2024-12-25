@@ -1,0 +1,12 @@
+= Ubuntu network configuration
+
+== Static ip configuration
+
+sudo nano */etc/netplan/.yaml*
+
+image::Images/Network/ubuntu.png[]
+
+image::Images/Network/ubuntu_gw.png[]
+
+sudo netplan apply +
+sudo systemctl restart systemd-sysctl
