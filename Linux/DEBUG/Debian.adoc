@@ -1,0 +1,5 @@
+= Debian - Debug
+
+== Apt issue - Unable to locate package
+
+image::../Images/Debug/debian_apt_debug.png[]
