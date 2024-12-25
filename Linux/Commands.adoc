@@ -205,3 +205,5 @@ PS1='\t - [\[\e[3m\]\h\[\e[0m\]-\u:\[\e[1m\]\w\[\e[0m\]]\n->' +
 
 Alias ll='ls -la'
 
+== Ubuntu - Local server - Stop cloud services
+sudo systemctl disable cloud-init cloud-init-local cloud-config cloud-final
