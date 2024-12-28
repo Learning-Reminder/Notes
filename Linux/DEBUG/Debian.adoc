@@ -1,5 +1,6 @@
 = Debian - Debug
 
 == Apt issue - Unable to locate package
+sudo vim */etc/apt/sources.list*
 
 image::../Images/Debug/debian_apt_debug.png[]
