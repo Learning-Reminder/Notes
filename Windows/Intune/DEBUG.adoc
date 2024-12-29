@@ -1,0 +1,5 @@
+= Validation and debugging with Intune
+
+== GPO like validation
+*Event viewer of a local device :* +
+Applications and Services Logs > Microsoft > Windows > Microsoft-Windows-DeviceManagement-Enterprise-Diagnostics-Provider > Admin
