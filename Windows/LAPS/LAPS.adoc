@@ -1,5 +1,9 @@
 = LAPS configuration
 
+== Entra ID Activation
+Office 365 > Identity > Devices > Devices parameters > Local administrator parameter
+
+= On prem Activation and configuration
 == Patch required
 * Windows 11 24H2 : nativ
 * Windows 11 22H2 : KB5025239
