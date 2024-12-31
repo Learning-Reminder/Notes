@@ -1,0 +1,65 @@
+= Firewalld configuration
+
+== Firewalld service handler commands
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*sudo systemctl stop firewalld*
+|Stop firewalld service
+
+|*sudo systemctl start firewalld*
+|Start firewalld service
+
+|*sudo firewalld-cmd --reload*
+|Reload firewalld service
+|===
+
+== Firewalld zone commands
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*sudo firewall-cmd --get-zones*
+|List all existing zones
+
+|*sudo firewall-cmd --get-default-zones*
+|Show the active default zone
+
+|*sudo firewall-cmd --get-active-zones*
+|Show for every interface what zone is assigned
+
+|*sudo firewall-cmd --permanent --new-zone=[new_zone_name]*
+|Create a new zone
+
+|*sudo firewall-cmd --zone=[zone_name] --change-interface=[interfaec_name]*
+|Assign zone to an interface
+|===
+
+== Firewalld rule commands
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*sudo firewall-cmd --list-all*
+|Show every existing rule create on each zone
+
+|*sudo firewall-cmd --zone=[zone_name] --list-all*
+|Show every existing rule for a specific zone
+
+|*sudo firewall-cmd --zone=[zone_name]  --permanent --add-service=[service_name]*
+|Allow a specific service for a specific zone
+
+|*sudo firewall-cmd --zone=[zone_name]  --permanent --add-port=[port_number]/[tcp or udp]*
+|Allow a specific port for a specific zone. Ex. 23/tcp
+
+|===
+
+== NAT configuration example
+----
+sudo firewall-cmd --direct --add-rule ipv4 filter FORWARD 0 -i ens224 -o ens192 -p tcp --sport 22 -j ACCEPT
+sudo firewall-cmd --direct --add-rule ipv4 filter FORWARD 0 -i ens192 -o ens224 -p tcp --dport 22 -j ACCEPT
+----
