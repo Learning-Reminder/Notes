@@ -1,0 +1,60 @@
+= UFW configuration
+
+== Service Commands
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*sudo ufw status*
+|Show ufw service status
+
+|*sudo ufw reset*
+|Erase all existing rule
+
+|*sudo ufw default deny incoming*
+|Disabled external to internal connection attempt
+
+|*sudo ufw default allow outgoing*
+|Enable internal to external connection attempt
+
+|*sudo ufw logging on*
+|Enable logs
+|===
+
+== Rule Commands
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*sudo ufw allow [service_name]*
+|Allow connection for a specific service. sudo ufw allow "Apache Full". sudo ufw allow "NGINX Full"
+
+|*sudo ufw allow [port_number]/[tcp or udp]*
+|Allow connection for a specific port
+
+|*sudo ufw allow from [source_ip_address]*
+|Allow connection for a specific source ip address
+
+|*sudo ufw allow from [source_subnet]/[netmask]*
+|Allow connection for a specific subnet
+
+|*sudo ufw allow from [source_ip_address] to [destination_ip_address] port [port_number] proto [TCP or UDP]*
+|Allow connection from a specific source ip address to a specific destination on a specific port.  sudo ufw allow from IP_ADDRESSE to any port 22
+
+|*sudo ufw allow *out* [port_number]/[tcp or udp]*
+|Allow outgoing connection for a specific port
+
+|*sudo ufw limit PORT[/PROTOCOL]*
+|Allow maximum 6 connections in the last 30sec to the specific port
+
+|*sudo ufw deny in on [interface_name] from [source_ip_address]*
+|Deny connection/forwarding from a specific source ip address on a specific interface
+
+|*sudo ufw status numbered*
+|Show all existing rule with line number
+
+|*sudo ufw delete [line_number]*
+|Delete the specified rule
+|===
