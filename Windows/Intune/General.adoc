@@ -2,3 +2,8 @@
 
 == Policy / GPO
 If GPO is applied both on user and local computer, *its the user GPO that prevail*. +
+
+== LAPS
+*Access local admin password :* +
+Devices > All devices > PC-01 > Local administrator password
+
