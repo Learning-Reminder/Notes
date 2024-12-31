@@ -1,0 +1,4 @@
+= General (important) informations
+
+== Policy / GPO
+If GPO is applied both on user and local computer, *its the user GPO that prevail*. +
