@@ -1,3 +1,28 @@
 = Ubuntu - DNS configuration
 
 == Installation
+sudo apt install bind9
+
+== Debug
+*If cache server and there is an issue with own resolving :* sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf 
+
+== Configuration
+
+== Master
+image::../../Images/Services/DNS_master.png[]
+
+*Force slave sync :* sudo rndc reload
+
+== Slave
+image::../../Images/Services/DNS_slave.png[]
+
+== Cache
+image::../../Images/Services/DNS_cache.png[]
+
+*Dump cache :* sudo rndc dumpdb -cache
+
+== Direct zone
+image::../../Images/Services/DNS_direct_zone.png[]
+
+== Reverse zone
+image::../../Images/Services/DNS_rev_zone.png[]
