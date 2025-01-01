@@ -1,4 +1,38 @@
 = SFTP configuration
 
-== Create sftp group
-sudo addgroup sftp
+== Configuration
+* sudo addgroup group_name
+* sudo adduser username
+* sudo adduser username group_name
+* sudo mkdir -p /var/sftp/dir_name
+* sudo chmod 755 /var/sftp
+* sudo chown username:username /var/sftp/dir_name
+* Add config to /etc/ssh/sshd_config :
+----
+Match group sftp 
+	ChrootDirectory /var/sftp 
+	X11Forwarding no 
+	AllowTcpForwarding no 
+	AllowAgentForwarding no 
+	ForceCommand internal-sftp
+Match All
+----
+
+== Commands
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*get file_name*
+|Download specified file
+
+|*get -d dir_name*
+|Download specified directory
+
+|*put file_name*
+|Upload specified file
+
+|*put -d dir_name*
+|Upload specified directory
+|===
