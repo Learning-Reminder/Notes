@@ -1,6 +1,51 @@
 = SSH configuration
 
 == Generate ssh key
+ssh-keygen -b 4096
+
+== Debug
+sudo tail -f /var/log/auth.log
+
+== Commands
+[cols=2, options="header"]
+|===
+|Command
+|Description
+
+|*ssh user@server_ip*
+|Connect to a specified server as the specific user
+
+|*ssh-keyscan 10.1.1.21 10.1.1.22 10.1.1.23 >> /var/lib/one/.ssh/known_hosts*
+|Scan specified ip_address and add public key to the known_hosts file
+
+|*ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub 10.1.1.21*
+|Copy the specified public key to the specified ip_address
+
+|*scp -p /var/lib/one/.ssh/known_hosts 10.1.1.22:/var/lib/one/.ssh/*
+|Upload / copy a specified file to a specified host
+|===
 
 == .ssh dir hierarchy
+[cols=2, options="header"]
+|===
+|Dir / file name
+|Rights
 
+|*.ssh*
+|700 (drwx------)
+
+|*public_key*
+|644 (-rw-r--r--)
+
+|*private_key*
+|600(-rw------)
+
+|*authorized_keys*
+|600(-rw------)
+
+|*known_hosts*
+|644 (-rw-r--r--)
+
+|*config*
+|600(-rw------)
+|===
