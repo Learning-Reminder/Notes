@@ -3,3 +3,7 @@
 == GPO like validation
 *Event viewer of a local device :* +
 Applications and Services Logs > Microsoft > Windows > Microsoft-Windows-DeviceManagement-Enterprise-Diagnostics-Provider > Admin
+
+== .EXE deployment
+* use *CMTRACE* app +
+*Look out :* C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\IntuneManagementExtension.log
