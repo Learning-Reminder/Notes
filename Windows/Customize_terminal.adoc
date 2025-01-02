@@ -1,0 +1,10 @@
+= Customize terminal
+
+== Configuration
+* Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
+* notepad $PROFILE
+  * oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/stelbent-compact.minimal.omp.json" | Invoke-Expression
+
+*To make images appear :*
+
+* oh-my-posh font install *cascadia code*
