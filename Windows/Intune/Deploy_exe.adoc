@@ -1,0 +1,30 @@
+= Deploy .exe app
+
+== How to get .intunewin file
+* Download ZIP from : https://github.com/microsoft/Microsoft-Win32-Content-Prep-Tool
+* Download .exe app installer
+* .\IntuneWinAppUtil.exe
+
+== Create policy
+Applications > all applications > add new application > Windows application (Win32)
+
+== Install / uninstall commands
+*Popular quiet installation commands :* +
+
+* app.exe /S
+* app.exe /quiet
+* app.exe /quiet /acceptTerms=1
+* app.exe /q
+
+*If popular commands are not working test these commands for informations :* +
+
+* app.exe /?
+* app.exe /help
+* app.exe --help
+* look app documentation
+
+*E.g.* +
+*Install :* +
+npp.8.6.Installer.x64.exe /S +
+*Uninstall :* +
+"%ProgramFiles%\Notepad++\uninstall.exe" /S
