@@ -1,0 +1,10 @@
+= Install app using PowerShell script
+
+== Configuration
+Applications > all applications > add new application > Windows application (Win32) +
+
+*Install command :* +
+%SystemRoot%\sysnative\WindowsPowerShell\v1.0\powershell.exe -WindowStyle hidden -ExecutionPolicy Bypass -Command .\NewTeamsInstall.ps1 +
+
+*Uninstall command :* +
+%SystemRoot%\sysnative\WindowsPowerShell\v1.0\powershell.exe -WindowStyle hidden -ExecutionPolicy Bypass -Command .\NewTeamsUninstall.ps1
