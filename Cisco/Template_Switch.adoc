@@ -1,0 +1,302 @@
+= Configuration template
+
+== Switch L3 (3750)
+----
+service password-encryption
+!
+security password min-length 10
+!
+hostname SS-SWD-01
+!
+enable secret pwd
+!
+username gpgm password pwd
+!
+aaa new-model
+!
+aaa authentication login default group radius local
+!
+!VOIP ENABLE
+!mls qos
+!
+ip routing
+no ip domain-lookup
+ip domain-name domain.com
+!
+! Required to Enable helper-address
+ip dhcp relay enable
+!
+login block-for 180 attempts 4 within 120
+!
+! Required for Ansible
+file prompt quiet
+!
+spanning-tree mode rapid-pvst
+!spanning-tree extend system-id
+spanning-tree vlan 10,20,30,40,99,110,120,130 priority 24576
+spanning-tree vlan 48,52,56,150 priority 28672
+!
+vlan 100
+    name LAN
+!
+vlan 102
+    name iSCSI
+!
+vlan 103
+    name NFS
+!
+vlan 104
+    name vMotion/FT
+!
+vlan 150
+    name Voice
+!
+vlan 199
+    name Management
+!
+vlan 666
+	name BlackHole
+!
+interface Port-channel1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+!
+interface Port-channel2
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+!
+interface Port-channel3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ channel-group 1 mode on
+!
+interface GigabitEthernet1/0/2
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ channel-group 1 mode on
+!
+interface GigabitEthernet1/0/3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ channel-group 2 mode on
+!
+interface GigabitEthernet1/0/4
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ channel-group 2 mode on
+!
+interface GigabitEthernet1/0/5
+ no switchport
+ ip address 10.0.14.1 255.255.255.0
+!
+interface GigabitEthernet1/0/6
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet1/0/7
+ no switchport
+ ip address 10.0.5.2 255.255.255.0
+ ! FORCE AAA AUTH ON THAT SPECIFIC INT
+!dot1x port-control auto
+!
+interface GigabitEthernet1/0/8
+ switchport access vlan 666
+!
+interface GigabitEthernet1/0/11
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ channel-group 3 mode on
+!
+interface GigabitEthernet1/0/12
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ channel-group 3 mode on
+!
+interface GigabitEthernet1/0/13
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ channel-group 3 mode on
+!
+interface GigabitEthernet1/0/14
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ channel-group 3 mode on
+!
+!PORTFAST CAN BE ENABLE GLOBALY
+!spanning-tree portfast default
+!spanning-tree portfast bpduguard default
+!
+interface GigabitEthernet1/0/15
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport mode access
+ switchport access vlan 100
+ switchport port-security
+ switchport port-security max 5 
+ switchport port-security mac-address sticky
+ ! COULD BE FOR 1 DEVICE ONLY
+ !switchport port-security mac-address mac_address
+!
+!VOIP INT EXAMPLE
+interface GigabitEthernet1/0/16
+ mls qos trust cos
+ switchport voice vlan 150
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport mode access
+ switchport access vlan 100
+ switchport port-security
+ switchport port-security max 5 
+ switchport port-security mac-address sticky
+ ! COULD BE FOR 1 DEVICE ONLY
+ !switchport port-security mac-address mac_address
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan10
+ ip address 10.0.10.2 255.255.252.0
+ ip helper-address 10.0.100.110
+ ip helper-address 10.0.100.111
+ standby version 2
+ standby 1 ip 10.0.10.1
+!STANDBY PRIORITY BY DEFAULT 100. HIGHER VALUE SET AS PRIMARY
+ standby 1 priority 150
+ standby 1 preempt
+ standby 1 timers 250 1000
+!
+interface Vlan20
+ ip address 10.0.20.2 255.255.252.0
+ ip helper-address 10.0.100.110
+ ip helper-address 10.0.100.111
+ standby version 2
+ standby 2 ip 10.0.20.1
+ standby 2 priority 150
+ standby 2 preempt
+!
+interface Vlan30
+ ip address 10.0.30.2 255.255.252.0
+ ip helper-address 10.0.100.110
+ ip helper-address 10.0.100.111
+ standby version 2
+ standby 3 ip 10.0.30.1
+ standby 3 priority 150
+ standby 3 preempt
+!
+interface Vlan40
+ ip address 10.0.40.2 255.255.252.0
+ ip helper-address 10.0.100.110
+ ip helper-address 10.0.100.111
+ standby version 2
+ standby 4 ip 10.0.40.1
+ standby 4 priority 150
+ standby 4 preempt
+!
+interface Vlan48
+ ip address 10.0.48.2 255.255.252.0
+ standby version 2
+ standby 7 ip 10.0.48.1
+!
+interface Vlan52
+ ip address 10.0.52.2 255.255.252.0
+ standby version 2
+ standby 8 ip 10.0.52.1
+!
+interface Vlan56
+ ip address 10.0.56.2 255.255.252.0
+ standby version 2
+ standby 9 ip 10.0.56.1
+!
+interface Vlan99
+ ip address 10.0.99.2 255.255.255.0
+ standby version 2
+ standby 5 ip 10.0.99.1
+ standby 5 priority 150
+ standby 5 preempt
+!
+interface Vlan110
+ ip address 10.0.110.2 255.255.255.0
+ standby version 2
+ standby 6 ip 10.0.110.1
+ standby 6 priority 150
+ standby 6 preempt
+!
+interface Vlan120
+ description vlanwifi-employC)
+ ip address 10.0.120.2 255.255.255.0
+ standby version 2
+ standby 11 ip 10.0.120.1
+ standby 11 priority 150
+ standby 11 preempt
+!
+interface Vlan130
+ description vlanwifi-guessC)
+ ip address 10.0.130.2 255.255.255.0
+ standby version 2
+ standby 12 ip 10.0.130.1
+ standby 12 priority 150
+ standby 12 preempt
+!
+interface Vlan150
+ ip address 10.0.150.2 255.255.255.0
+ ip helper-address 10.0.100.111
+ ip helper-address 10.0.100.110
+ standby version 2
+ standby 10 ip 10.0.150.1
+!
+interface Vlan666
+ no ip address
+!
+router ospf 1
+ router-id 4.4.4.4
+ network 10.0.5.0 0.0.0.255 area 0
+!
+kron occurrence backup-conf at 12:30 Wed recurring
+ policy-list backup-conf
+!
+kron policy-list backup-conf
+ cli show running-config | redirect tftp://10.0.100.40/switch/SWD/SS-SWD-01
+!
+radius server SS-AAA-01
+ address ipv4 10.0.100.30 auth-port 1645 acct-port 1646
+ key 7 050C360820791901392437
+! IT COULD BE TOO
+radius-server host 10.0.100.30 auth-port 1645 acct-port 1646
+radius-server key 7 00032301056E5C0E2F006C
+!
+line con 0
+ password pwd
+ logging synchronous
+ login local
+! FOR RADIUS
+!login authentication default local-case
+line vty 0 15
+ exec-timeout 6 0
+ password pwd
+ transport input ssh
+ logging synchronous
+ login local
+! FOR RADIUS
+!login authentication default local-case
+!
+ntp server 10.0.5.1,10.0.14.2
+!
+crypto key generate rsa general-keys modulus 4096
+----
