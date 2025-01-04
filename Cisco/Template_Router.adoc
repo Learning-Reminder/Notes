@@ -1,6 +1,0 @@
-= Configuration template
-
-== Switch L3 (3750)
-----
-
-----
